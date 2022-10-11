@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Song extends Model {
     /**
@@ -10,15 +8,40 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      // define association here
+      Song.belongsTo(models.Playlist);
     }
   }
-  Song.init({
-    songId: DataTypes.STRING,
-    PlaylistId: DataTypes.INTEGER
-  }, {
-    sequelize,
-    modelName: 'Song',
-  });
+  Song.init(
+    {
+      songId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Song Id is required",
+          },
+          notEmpty: {
+            msg: "Song Id cannot be empty",
+          },
+        },
+      },
+      PlaylistId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        validate: {
+          notNull: {
+            msg: "Playlist Id is required",
+          },
+          notEmpty: {
+            msg: "Playlist Id cannot be empty",
+          },
+        },
+      },
+    },
+    {
+      sequelize,
+      modelName: "Song",
+    }
+  );
   return Song;
 };
