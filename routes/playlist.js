@@ -6,6 +6,7 @@ router.use(Authentication);
 router.get("/", playlistController.readAllPlaylist);
 router.post("/", playlistController.addPlaylist);
 router.get("/:playlistId", playlistController.readPlaylistById);
+router.delete("/:playlistId", Authorized, playlistController.deletePlaylist);
 router.patch(
   "/:playlistId/:songId",
   Authorized,
@@ -16,6 +17,5 @@ router.delete(
   Authorized,
   playlistController.deleteSongFromPlaylist
 );
-router.delete("/:playlistId", Authorized, playlistController.deletePlaylist);
 
 module.exports = router;

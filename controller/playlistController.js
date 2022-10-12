@@ -37,7 +37,6 @@ class playlistController {
         message: "Playlist created successfully",
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -72,7 +71,6 @@ class playlistController {
         data: song.body,
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -90,7 +88,6 @@ class playlistController {
         message: "Success adding song to your playlist",
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
@@ -125,6 +122,7 @@ class playlistController {
   static async deletePlaylist(req, res, next) {
     try {
       const { playlistId } = req.params;
+
       await Playlist.destroy({
         where: {
           id: playlistId,
@@ -135,7 +133,6 @@ class playlistController {
         message: "Playlist deleted successfully",
       });
     } catch (error) {
-      console.log(error);
       next(error);
     }
   }
