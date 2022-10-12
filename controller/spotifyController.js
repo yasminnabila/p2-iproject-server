@@ -18,6 +18,53 @@ class spotifyController {
     }
   }
 
+  //? GET ALBUM
+  static async getAlbumById(req, res, next) {
+    try {
+      const { albumId } = req.query;
+      const spotifyApi = await spotify();
+      const album = await spotifyApi.getAlbum(albumId);
+      res.status(200).json({
+        data: album.body,
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  //? GET ARTIST
+  // https://api.spotify.com/v1/artists/id
+  static async getArtistById(req, res, next) {
+    try {
+      const { artistId } = req.query;
+      const spotifyApi = await spotify();
+      const artist = await spotifyApi.getArtist(artistId);
+      const album = await spotifyApi.getArtistAlbums(artistId);
+      const tracks = await spotifyApi.getArtistTopTracks(artistId, "ID");
+      const relatedArtist = await spotifyApi.getArtistRelatedArtists(
+        artistId,
+        "ID"
+      );
+
+      let result = [];
+      album.body.items.forEach((el) => {
+        if (el.available_markets.includes("ID")) {
+          result.push(el);
+        }
+      });
+      res.status(200).json({
+        data: {
+          artist: artist.body,
+          albums: result,
+          tracks: tracks.body.tracks,
+          relatedArtist: artist.body.artist,
+        },
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
+
   //? SEARCH TRACK
   // https://api.spotify.com/v1/search?type=album&include_external=audio
   static async searchSong(req, res, next) {
@@ -34,17 +81,18 @@ class spotifyController {
     }
   }
 
-  //? GET ALBUM
-  static async readAlbumById(req, res, next) {
+  //? GET AUDIO FEATURES
+  static async getAudioFeatures(req, res, next) {
     try {
-      const { albumId } = req.query;
+      const { songId } = req.query;
       const spotifyApi = await spotify();
-      const album = await spotifyApi.getAlbum(albumId);
+      let audioFeature = await spotifyApi.getAudioFeaturesForTrack(songId);
       res.status(200).json({
-        data: album.body,
+        statusCode: 200,
+        data: audioFeature.body,
       });
-    } catch (error) {
-      next(error);
+    } catch (err) {
+      next(err);
     }
   }
 }
