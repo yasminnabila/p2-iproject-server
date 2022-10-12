@@ -1,7 +1,7 @@
 const { tokenJWT } = require("../helpers/jwt");
 const { User, Playlist } = require("../models");
 
-const isLoggedIn = async (req, res, next) => {
+const Authentication = async (req, res, next) => {
   try {
     const access_token = req.headers.access_token;
     if (!access_token) {
@@ -29,12 +29,10 @@ const isLoggedIn = async (req, res, next) => {
   }
 };
 
-const isAuthorized = async (req, res, next) => {
+const Authorized = async (req, res, next) => {
   try {
     const { id: userId } = req.user;
     const { playlistId } = req.params;
-
-    console.log(authorId, playlistId, "<<<<<");
 
     const findPlaylist = await Playlist.findByPk(playlistId);
     if (!findPlaylist) {
@@ -44,7 +42,7 @@ const isAuthorized = async (req, res, next) => {
       };
     }
 
-    if (findUser.id !== findPlaylist.UserId) {
+    if (userId !== findPlaylist.UserId) {
       throw {
         code: 403,
         msg: "Forbidden access",
@@ -57,6 +55,6 @@ const isAuthorized = async (req, res, next) => {
 };
 
 module.exports = {
-  isLoggedIn,
-  isAuthorized,
+  Authentication,
+  Authorized,
 };

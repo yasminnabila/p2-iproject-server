@@ -76,6 +76,69 @@ class playlistController {
       next(error);
     }
   }
+
+  static async addSongToPlaylist(req, res, next) {
+    try {
+      const { playlistId, songId } = req.params;
+      console.log(playlistId, songId, "INI REQ PARAMS");
+      await Song.create({
+        PlaylistId: playlistId,
+        songId: songId,
+      });
+
+      res.status(201).json({
+        message: "Success adding song to your playlist",
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
+
+  static async deleteSongFromPlaylist(req, res, next) {
+    try {
+      const { playlistId, songId } = req.params;
+
+      let findSong = await Song.findByPk(songId);
+      if (!findSong) {
+        throw {
+          code: 404,
+          msg: "Song not found",
+        };
+      }
+
+      await Song.destroy({
+        where: {
+          id: songId,
+          PlaylistId: playlistId,
+        },
+      });
+
+      res.status(200).json({
+        message: "Success deleting song from your playlist",
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  static async deletePlaylist(req, res, next) {
+    try {
+      const { playlistId } = req.params;
+      await Playlist.destroy({
+        where: {
+          id: playlistId,
+        },
+      });
+      res.status(200).json({
+        statusCode: 200,
+        message: "Playlist deleted successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      next(error);
+    }
+  }
 }
 
 module.exports = playlistController;
