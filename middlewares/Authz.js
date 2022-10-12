@@ -56,8 +56,6 @@ const isAuthorized = async (req, res, next) => {
   }
 };
 
-module.exports = AuthorizationAdmin;
-
 module.exports = {
   isLoggedIn,
   isAuthorized,
