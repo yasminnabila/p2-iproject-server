@@ -8,13 +8,13 @@ const spotify = async () => {
     clientSecret: process.env.SPOTIFY_CLIENT_SECRET,
   });
 
-  // //? Retrieve an access token and a refresh token
-  // const data = await spotifyApi.clientCredentialsGrant();
+  //? Retrieve an access token and a refresh token
+  const data = await spotifyApi.clientCredentialsGrant();
 
-  // //? Set the access token on the API object to use it in later calls
-  // spotifyApi.setAccessToken(data.body["access_token"]);
-  // spotifyApi.setRefreshToken(data.body["refresh_token"]);
-  // return spotifyApi;
+  //? Set the access token on the API object to use it in later calls
+  spotifyApi.setAccessToken(data.body["access_token"]);
+  spotifyApi.setRefreshToken(data.body["refresh_token"]);
+  return spotifyApi;
 };
 
 module.exports = spotify;

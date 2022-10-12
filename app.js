@@ -1,15 +1,15 @@
-const cors = require("cors");
 if (process.env.NODE_ENV !== "production") {
   require("dotenv").config();
 }
-// const SpotifyWebApi = require("spotify-web-api-node");
-const axios = require("axios");
+const cors = require("cors");
 const express = require("express");
 const app = express();
-const routes = require("./routes");
-const PORT = process.env.PORT || 3000;
-
 app.use(cors());
+// const SpotifyWebApi = require("spotify-web-api-node");
+const axios = require("axios");
+const routes = require("./routes");
+const PORT = process.env.PORT || 8888;
+
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -105,7 +105,7 @@ app.use("/", routes);
 
 app.listen(PORT, () =>
   console.log(
-    "HTTP Server up. Now go to http://localhost:3000/login in your browser."
+    "HTTP Server up. Now go to http://localhost:8888/login in your browser."
   )
 );
 
