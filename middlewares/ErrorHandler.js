@@ -13,9 +13,6 @@ module.exports = (error, req, res, next) => {
   } else if (error.code) {
     code = error.code;
     msg = error.msg;
-  } else if (error.name === "WebapiRegularError") {
-    code = error.body.error.status;
-    msg = error.body.error.message;
   }
   res.status(code).json({
     message: msg,
