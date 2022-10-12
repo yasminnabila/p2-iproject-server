@@ -68,6 +68,7 @@ class playlistController {
         };
       }
       res.status(200).json({
+        statusCode: 200,
         data: song.body,
       });
     } catch (error) {
@@ -85,6 +86,7 @@ class playlistController {
       });
 
       res.status(201).json({
+        statusCode: 201,
         message: "Success adding song to your playlist",
       });
     } catch (error) {
@@ -112,6 +114,7 @@ class playlistController {
       });
 
       res.status(200).json({
+        statusCode: 200,
         message: "Success deleting song from your playlist",
       });
     } catch (error) {

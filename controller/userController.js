@@ -12,6 +12,8 @@ class userController {
         password,
       });
       res.status(201).json({
+        statusCode: 201,
+        message: "User created successfully",
         id: newUser.id,
         email: newUser.email,
       });
@@ -59,6 +61,8 @@ class userController {
       const token = signJWT(payload);
 
       res.status(200).json({
+        statusCode: 200,
+        message: "User logged in successfully",
         access_token: token,
       });
     } catch (error) {
