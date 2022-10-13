@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", routes);
 
-app.listen(3000, () => {
-  console.log('App is on port 3000');
+app.listen(port, () => {
+  console.log(`App is on port ${port}`);
 });
 
 module.exports = app;
