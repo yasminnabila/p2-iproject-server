@@ -95,6 +95,18 @@ class spotifyController {
       next(err);
     }
   }
+
+  static async getNewReleases(req, res, next) {
+    try {
+      const spotifyApi = await spotify();
+      const newRelease = await spotifyApi.getNewReleases();
+      res.status(200).json({
+        data: newRelease.body.albums.items,
+      });
+    } catch (err) {
+      next(err);
+    }
+  }
 }
 
 module.exports = spotifyController;
