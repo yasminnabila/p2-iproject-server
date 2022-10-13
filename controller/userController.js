@@ -69,23 +69,6 @@ class userController {
       next(error);
     }
   }
-
-  static async me(req, res, next) {
-    try {
-      const { id } = req.user;
-      const userDetail = await User.findByPk(id);
-      res.status(200).json({
-        statusCode: 200,
-        data: {
-          id: userDetail.id,
-          email: userDetail.email,
-          name: userDetail.name,
-        },
-      });
-    } catch (err) {
-      next(err);
-    }
-  }
 }
 
 module.exports = userController;
