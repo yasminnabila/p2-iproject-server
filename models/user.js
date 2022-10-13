@@ -53,6 +53,18 @@ module.exports = (sequelize, DataTypes) => {
           },
         },
       },
+      status: {
+        type: DataTypes.STRING,
+        defaultValue: "Reguler",
+        validate: {
+          notNull: {
+            msg: "Status is required",
+          },
+          notEmpty: {
+            msg: "Status cannot be empty",
+          },
+        },
+      },
     },
     {
       sequelize,
