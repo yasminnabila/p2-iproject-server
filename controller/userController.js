@@ -101,7 +101,7 @@ class userController {
       .then((transaction) => {
         // transaction token
         let transactionToken = transaction.token;
-        console.log("transactionToken:", transactionToken);
+        // console.log("transactionToken:", transactionToken);
         res.status(201).json({ transactionToken: transactionToken });
       })
       .catch((error) => {
