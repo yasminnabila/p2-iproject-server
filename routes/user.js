@@ -4,5 +4,6 @@ const { Authentication } = require("../middlewares/Authz");
 
 router.post("/register", userController.register);
 router.post("/login", userController.login);
+router.post("/payments", userController.snapPayment);
 
 module.exports = router;
