@@ -36,6 +36,12 @@ module.exports = (sequelize, DataTypes) => {
             msg: "Playlist Id cannot be empty",
           },
         },
+        references: {
+          model: "Playlists",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
       },
     },
     {
