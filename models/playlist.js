@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Playlist extends Model {
     /**
@@ -10,8 +8,8 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-       Playlist.belongsTo(models.User);
-       Playlist.hasMany(models.Song);
+      Playlist.belongsTo(models.User);
+      Playlist.hasMany(models.Song);
     }
   }
   Playlist.init(
@@ -40,6 +38,12 @@ module.exports = (sequelize, DataTypes) => {
             msg: "User Id cannot be empty",
           },
         },
+        references: {
+          model: "Users",
+          key: "id",
+        },
+        onUpdate: "cascade",
+        onDelete: "cascade",
       },
     },
     {

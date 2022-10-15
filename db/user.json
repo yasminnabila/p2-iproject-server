@@ -1,0 +1,20 @@
+[
+  {
+    "username": "alul",
+    "email": "alul@gmail.com",
+    "password": "12345",
+    "status": "Reguler"
+  },
+  {
+    "username": "tanjung",
+    "email": "tanjung@gmail.com",
+    "password": "12345",
+    "status": "Reguler"
+  },
+  {
+    "username": "gioia",
+    "email": "gioia@gmail.com",
+    "password": "12345",
+    "status": "Premium"
+  }
+]

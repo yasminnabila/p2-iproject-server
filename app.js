@@ -12,8 +12,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use("/", routes);
 
-app.listen(PORT, () => {
-  console.log("iProject is running on port", PORT);
+app.listen(port, () => {
+  console.log(`App is on port ${port}`);
 });
 
 module.exports = app;
